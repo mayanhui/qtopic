@@ -146,6 +146,5 @@ public class WordSegment {
 
 	public static void main(String[] args) {
 		getPath();
-
 	}
 }
