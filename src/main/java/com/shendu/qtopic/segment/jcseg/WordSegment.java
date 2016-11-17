@@ -1,6 +1,5 @@
 package com.shendu.qtopic.segment.jcseg;
 
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,17 +19,17 @@ import org.lionsoul.jcseg.tokenizer.core.JcsegException;
 import org.lionsoul.jcseg.tokenizer.core.JcsegTaskConfig;
 import org.lionsoul.jcseg.tokenizer.core.SegmentFactory;
 
-
 public class WordSegment {
-	private static int name=0;
-	private static ArrayList<String> FileList = new ArrayList<String>(); 
+	private static int name = 0;
+	private static ArrayList<String> FileList = new ArrayList<String>();
 
 	/**
-		 * @param filepath   输入路径
-		 * @return           返回路径下的每一个文件
-		 * @throws FileNotFoundException
-		 * @throws IOException
-		 */
+	 * @param filepath
+	 *            输入路径
+	 * @return 返回路径下的每一个文件
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 
 	public static List<String> readDirs(String filepath)
 			throws FileNotFoundException, IOException {
@@ -57,9 +56,11 @@ public class WordSegment {
 		}
 		return FileList;
 	}
+
 	/**
 	 * 
-	 * @param path  输入文件的路径
+	 * @param path
+	 *            输入文件的路径
 	 * @throws IOException
 	 */
 
@@ -100,12 +101,9 @@ public class WordSegment {
 		}
 
 	}
-	
 
 	public static void way2(String str) throws IOException {
-//		
-//		name=name+1;
-//		System.out.println("@@@@@@@"+name);
+		// name=name+1;
 
 		BufferedWriter bw = null;
 		bw = new BufferedWriter(new FileWriter(
@@ -136,17 +134,18 @@ public class WordSegment {
 		// 获取分词结果
 		IWord word = null;
 		while ((word = seg.next()) != null) {
-			if(word.getValue().length()>1){
-//				System.out.println(word.getValue()+"    "+word.getValue().length());
-				bw.write(word.getValue()+" ");
+			if (word.getValue().length() > 1) {
+				// System.out.println(word.getValue()+"    "+word.getValue().length());
+				bw.write(word.getValue() + " ");
 			}
 		}
 		bw.newLine();
 		bw.flush();
 		bw.close();
 	}
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		getPath();
-		
+
 	}
 }
