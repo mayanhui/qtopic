@@ -12,13 +12,14 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lionsoul.jcseg.core.ADictionary;
-import org.lionsoul.jcseg.core.DictionaryFactory;
-import org.lionsoul.jcseg.core.ISegment;
-import org.lionsoul.jcseg.core.IWord;
-import org.lionsoul.jcseg.core.JcsegException;
-import org.lionsoul.jcseg.core.JcsegTaskConfig;
-import org.lionsoul.jcseg.core.SegmentFactory;
+import org.lionsoul.jcseg.tokenizer.core.ADictionary;
+import org.lionsoul.jcseg.tokenizer.core.DictionaryFactory;
+import org.lionsoul.jcseg.tokenizer.core.ISegment;
+import org.lionsoul.jcseg.tokenizer.core.IWord;
+import org.lionsoul.jcseg.tokenizer.core.JcsegException;
+import org.lionsoul.jcseg.tokenizer.core.JcsegTaskConfig;
+import org.lionsoul.jcseg.tokenizer.core.SegmentFactory;
+
 
 public class WordSegment {
 	private static int name=0;
