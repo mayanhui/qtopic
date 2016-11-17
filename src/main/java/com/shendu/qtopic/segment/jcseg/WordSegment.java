@@ -1,4 +1,4 @@
-package com.shendu.segment.jcseg;
+package com.shendu.qtopic.segment.jcseg;
 
 
 import java.io.BufferedReader;
@@ -20,7 +20,7 @@ import org.lionsoul.jcseg.core.JcsegException;
 import org.lionsoul.jcseg.core.JcsegTaskConfig;
 import org.lionsoul.jcseg.core.SegmentFactory;
 
-public class Analyzer {
+public class WordSegment {
 	private static int name=0;
 	private static ArrayList<String> FileList = new ArrayList<String>(); 
 
@@ -71,7 +71,7 @@ public class Analyzer {
 			br = new BufferedReader(new FileReader(path));
 			while (br.ready()) {
 				line = br.readLine();
-				Analyzer.way2(line);
+				WordSegment.way2(line);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -86,7 +86,7 @@ public class Analyzer {
 	public static void getPath() {
 
 		try {
-			List path = Analyzer
+			List path = WordSegment
 					.readDirs("/mnt/hgfs/D/WebServiceData/newtestdata/");
 			for (int i = 0; i < path.size(); i++) {
 				String ph = path.get(i).toString();

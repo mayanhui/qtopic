@@ -1,5 +1,4 @@
-package com.shendu.segment.jcseg;
-
+package com.shendu.qtopic.segment.jcseg;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,11 +14,11 @@ import java.io.OutputStreamWriter;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RemoveStopWord {
+public class StopWordRemover {
 
 	public static void main(String[] args) throws IOException {
 		
-		Analyzer.getPath();
+		WordSegment.getPath();
 		File stopWordTable = new File("/root/resource/data/StopWordTable.txt");
 		File srcFile = new File("/mnt/hgfs/D/WebServiceData/data/Analyzer.txt");
 		File destFile = new File("/mnt/hgfs/D/WebServiceData/ldadata/analyzerstopword.txt");
@@ -61,8 +60,8 @@ public class RemoveStopWord {
 
 			Set stopWordSet = new HashSet<String>();
 			String stopWord = null;
-			destFileBw.write(String.valueOf(RemoveStopWord.count(srcFile)));
-			System.out.println(RemoveStopWord.count(srcFile));
+			destFileBw.write(String.valueOf(StopWordRemover.count(srcFile)));
+			System.out.println(StopWordRemover.count(srcFile));
 			destFileBw.newLine();
 			for (; (stopWord = StopWordFileBr.readLine()) != null;) {
 				stopWordSet.add(stopWord);
