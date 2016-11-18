@@ -89,7 +89,7 @@ public class WordSegment {
 
 		try {
 			List path = WordSegment
-					.readDirs("/mnt/hgfs/D/WebServiceData/newtestdata/");
+					.readDirs("/home/zkpk/workspace/qtopic/src/main/resources/dataset/");
 			for (int i = 0; i < path.size(); i++) {
 				String ph = path.get(i).toString();
 				ReadLocal(ph);
@@ -107,12 +107,12 @@ public class WordSegment {
 
 		BufferedWriter bw = null;
 		bw = new BufferedWriter(new FileWriter(
-				"/mnt/hgfs/D/WebServiceData/data/Analyzer.txt"));
+				"/home/zkpk/workspace/qtopic/src/main/resources/Analyzer.txt"));
 
 		// 创建JcsegTaskConfig分词任务实例
 		// 即从jcseg.properties配置文件中初始化的配置
 		JcsegTaskConfig config = new JcsegTaskConfig(
-				"/opt/modules/jcseg-1.9.5/jcseg.properties");
+				"/home/zkpk/workspace/qtopic/src/main/resources/jcseg.properties");
 		// 创建默认词库(即: com.webssky.jcseg.Dictionary对象)
 		ADictionary dic = DictionaryFactory.createDefaultDictionary(config);
 		// 依据JcsegTaskConfig配置中的信息加载全部jcseg词库.
@@ -135,8 +135,9 @@ public class WordSegment {
 		IWord word = null;
 		while ((word = seg.next()) != null) {
 			if (word.getValue().length() > 1) {
-				// System.out.println(word.getValue()+"    "+word.getValue().length());
+				System.out.println(word.getValue()+"    "+word.getValue().length());
 				bw.write(word.getValue() + " ");
+				
 			}
 		}
 		bw.newLine();
@@ -146,5 +147,6 @@ public class WordSegment {
 
 	public static void main(String[] args) {
 		getPath();
+		
 	}
 }
