@@ -87,6 +87,11 @@
 									    <artifactId>jgibblda</artifactId>
 									    <version>1.0</version>
                                 </artifactItem>
+                                <artifactItem>
+								    <groupId>args4j</groupId>
+								    <artifactId>args4j</artifactId>
+								    <version>2.0.16</version>
+								</artifactItem>
 							</artifactItems>
 							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
 						</configuration>
