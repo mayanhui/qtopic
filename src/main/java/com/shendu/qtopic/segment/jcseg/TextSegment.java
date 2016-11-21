@@ -115,8 +115,8 @@ public class TextSegment {
 	/*test main*/
 	public static void main(String[] args) throws IOException{
 		
-		String in = "/home/zkpk/workspace/qtopic/dataset/";
-		String out = "/home/zkpk/workspace/qtopic/seg-result/jcseg/";
+		String in = "/home/zkpk/workspace/qtopic/examples/dataset/";
+		String out = "/home/zkpk/workspace/qtopic/examples/seg-result/jcseg/";
 		
 		File inFile = new File(in);
 		if (!inFile.isDirectory()) {
