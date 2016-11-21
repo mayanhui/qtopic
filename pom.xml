@@ -29,13 +29,7 @@
 	</repositories>
 
 	<dependencies>
-<!--
-		<dependency>
-		    <groupId>org.lionsoul</groupId>
-		    <artifactId>jcseg</artifactId>
-		    <version>${jcseg.version}</version>
-		</dependency>
--->
+
 		<dependency>
 		    <groupId>org.lionsoul</groupId>
 		    <artifactId>jcseg-core</artifactId>
@@ -46,13 +40,11 @@
 		    <artifactId>jgibblda</artifactId>
 		    <version>1.0</version>
 		</dependency>
-		<!--
 		<dependency>
 		    <groupId>args4j</groupId>
 		    <artifactId>args4j</artifactId>
-		    <version>2.0.6</version>
+		    <version>2.0.16</version>
 		</dependency>
-		-->
 
 
 	</dependencies>

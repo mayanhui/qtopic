@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
 import org.lionsoul.jcseg.tokenizer.core.ADictionary;
 import org.lionsoul.jcseg.tokenizer.core.DictionaryFactory;
 import org.lionsoul.jcseg.tokenizer.core.ISegment;
@@ -69,6 +71,8 @@ public class TextSegment {
 		bw.close();
 	}
 
+	
+	
 
 	/**
 	 * segment a whole file line by line.
@@ -115,15 +119,44 @@ public class TextSegment {
 	/*test main*/
 	public static void main(String[] args) throws IOException{
 		
-		String in = "/home/zkpk/workspace/qtopic/examples/dataset/";
-		String out = "/home/zkpk/workspace/qtopic/examples/seg-result/jcseg/";
+		//String in = "/home/zkpk/workspace/qtopic/examples/dataset/";
+		//String out = "/home/zkpk/workspace/qtopic/examples/seg-result/jcseg/";
 		
-		File inFile = new File(in);
-		if (!inFile.isDirectory()) {
-			segment(inFile,new File(out));
-		} else {
-			segment(inFile.listFiles(),new File(out));
+		CmdOption option = new CmdOption();
+		CmdLineParser parser = new CmdLineParser(option);
+		
+		try {
+			if (args.length == 0){
+				showHelp(parser);
+				return;
+			}
+			
+			parser.parseArgument(args);
+			
+			File inFile = new File(option.in);
+			if (!inFile.isDirectory()) {
+				segment(inFile,new File(option.out));
+			} else {
+				segment(inFile.listFiles(),new File(option.out));
+			}
+			
+		}
+		catch (CmdLineException cle){
+			System.out.println("Command line error: " + cle.getMessage());
+			showHelp(parser);
+			return;
+		}
+		catch (Exception e){
+			System.out.println("Error in main: " + e.getMessage());
+			e.printStackTrace();
+			return;
 		}
 		
+		
+	}
+	
+	public static void showHelp(CmdLineParser parser){
+		System.out.println("TextSegment [options ...] [arguments...]");
+		parser.printUsage(System.out);
 	}
 }
