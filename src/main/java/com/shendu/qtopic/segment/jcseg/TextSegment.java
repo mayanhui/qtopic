@@ -8,8 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.lionsoul.jcseg.tokenizer.core.ADictionary;
 import org.lionsoul.jcseg.tokenizer.core.DictionaryFactory;
@@ -19,42 +17,7 @@ import org.lionsoul.jcseg.tokenizer.core.JcsegException;
 import org.lionsoul.jcseg.tokenizer.core.JcsegTaskConfig;
 import org.lionsoul.jcseg.tokenizer.core.SegmentFactory;
 
-public class WordSegment {
-	private static ArrayList<String> FileList = new ArrayList<String>();
-
-	/**
-	 * @param filepath
-	 *            输入路径
-	 * @return 返回路径下的每一个文件
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-
-	public static List<String> readDirs(String filepath)
-			throws FileNotFoundException, IOException {
-		try {
-			File file = new File(filepath);
-			if (!file.isDirectory()) {
-				System.out.println("输入的[]");
-				System.out.println("filepath:" + file.getAbsolutePath());
-			} else {
-				String[] flist = file.list();
-				for (int i = 0; i < flist.length; i++) {
-					File newfile = new File(filepath + "/" + flist[i]);
-					if (!newfile.isDirectory()) {
-						FileList.add(newfile.getAbsolutePath());
-					} else if (newfile.isDirectory()) // if file is a directory,
-														// call ReadDirs
-					{
-						readDirs(filepath + "/" + flist[i]);
-					}
-				}
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-		return FileList;
-	}
+public class TextSegment {
 	
 	/**
 	 * segment an whole text.
@@ -68,6 +31,12 @@ public class WordSegment {
 		// 即从jcseg.properties配置文件中初始化的配置
 		JcsegTaskConfig config = new JcsegTaskConfig(
 				"/home/zkpk/workspace/qtopic/src/main/resources/jcseg.properties");
+		
+		config.setClearStopwords(true);    //设置过滤停止词(lex-stopword.lex)
+		config.setAppendCJKSyn(false);      //设置关闭同义词追加
+		config.setKeepUnregWords(true);    //设置保留不识别的词条
+		config.setEnSecondSeg(false);       //关闭英文自动二次切分
+		
 		// 创建默认词库(即: com.webssky.jcseg.Dictionary对象)
 		ADictionary dic = DictionaryFactory.createDefaultDictionary(config);
 		// 依据JcsegTaskConfig配置中的信息加载全部jcseg词库.
@@ -143,7 +112,7 @@ public class WordSegment {
 	}
 
 
-	
+	/*test main*/
 	public static void main(String[] args) throws IOException{
 		
 		String in = "/home/zkpk/workspace/qtopic/dataset/";
