@@ -20,7 +20,6 @@ import org.lionsoul.jcseg.tokenizer.core.JcsegTaskConfig;
 import org.lionsoul.jcseg.tokenizer.core.SegmentFactory;
 
 public class WordSegment {
-	private static int name = 0;
 	private static ArrayList<String> FileList = new ArrayList<String>();
 
 	/**
@@ -56,58 +55,14 @@ public class WordSegment {
 		}
 		return FileList;
 	}
-
+	
 	/**
-	 * 
-	 * @param path
-	 *            输入文件的路径
+	 * segment an whole text.
+	 * @param text
 	 * @throws IOException
 	 */
-
-	public static void ReadLocal(String path) throws IOException {
-		BufferedReader br = null;
-		String line = null;
-		int count = 0;
-		String counttext = null;
-		try {
-			br = new BufferedReader(new FileReader(path));
-			while (br.ready()) {
-				line = br.readLine();
-				WordSegment.way2(line);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				br.close();
-			}
-		}
-
-	}
-
-	public static void getPath() {
-
-		try {
-			List path = WordSegment
-					.readDirs("/home/zkpk/workspace/qtopic/src/main/resources/dataset/");
-			for (int i = 0; i < path.size(); i++) {
-				String ph = path.get(i).toString();
-				ReadLocal(ph);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void way2(String str) throws IOException {
-		// name=name+1;
-
-		BufferedWriter bw = null;
-		bw = new BufferedWriter(new FileWriter(
-				"/home/zkpk/workspace/qtopic/src/main/resources/Analyzer.txt"));
+	public static void segment(String text,String out) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(out));
 
 		// 创建JcsegTaskConfig分词任务实例
 		// 即从jcseg.properties配置文件中初始化的配置
@@ -127,7 +82,7 @@ public class WordSegment {
 		ISegment seg = null;
 		try {
 			seg = SegmentFactory.createJcseg(JcsegTaskConfig.COMPLEX_MODE,
-					new Object[] { new StringReader(str), config, dic });
+					new Object[] { new StringReader(text), config, dic });
 		} catch (JcsegException e) {
 			e.printStackTrace();
 		}
@@ -145,8 +100,61 @@ public class WordSegment {
 		bw.close();
 	}
 
-	public static void main(String[] args) {
-		getPath();
+
+	/**
+	 * segment a whole file line by line.
+	 * 
+	 * @param path
+	 *            输入文件的路径
+	 * @throws IOException
+	 */
+
+	public static void segment(File in, File out) throws IOException {
+		BufferedReader br = null;
+		String line = null;
+		try {
+			br = new BufferedReader(new FileReader(in));
+			while (br.ready()) {
+				line = br.readLine();
+				segment(line,out.getPath() + File.separator + in.getName() + ".seg");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				br.close();
+			}
+		}
+
+	}
+	
+	/**
+	 * segment a whole file line by line.
+	 * 
+	 * @param ins
+	 *            输入文件的路径(multiple)
+	 * @throws IOException
+	 */
+
+	public static void segment(File[] ins, File out) throws IOException {
+		for (int i = 0; i < ins.length; i++) {
+			segment(ins[i],out);
+		}
+	}
+
+
+	
+	public static void main(String[] args) throws IOException{
+		
+		String in = "/home/zkpk/workspace/qtopic/dataset/";
+		String out = "/home/zkpk/workspace/qtopic/seg-result/";
+		
+		File inFile = new File(in);
+		if (!inFile.isDirectory()) {
+			segment(inFile,new File(out));
+		} else {
+			segment(inFile.listFiles(),new File(out));
+		}
 		
 	}
 }
