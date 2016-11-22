@@ -31,8 +31,9 @@ public class TextSegment {
 
 		// 创建JcsegTaskConfig分词任务实例
 		// 即从jcseg.properties配置文件中初始化的配置
-		JcsegTaskConfig config = new JcsegTaskConfig(
-				"/home/zkpk/workspace/qtopic/src/main/resources/jcseg.properties");
+		//JcsegTaskConfig config = new JcsegTaskConfig(
+		//		"/home/zkpk/workspace/qtopic/src/main/resources/jcseg.properties");
+		JcsegTaskConfig config = new JcsegTaskConfig("conf/jcseg.properties");
 		
 		config.setClearStopwords(true);    //设置过滤停止词(lex-stopword.lex)
 		config.setAppendCJKSyn(false);      //设置关闭同义词追加
